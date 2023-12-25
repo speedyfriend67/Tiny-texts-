@@ -25,26 +25,67 @@
       font-size: 12px;
       line-height: 1.5;
     }
+
+    #options {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    select, input {
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
   <div>
     <label for="text-input">Enter your text:</label>
     <textarea id="text-input" placeholder="Type here..."></textarea>
+    
+    <div id="options">
+      <label for="font-select">Select Font:</label>
+      <select id="font-select">
+        <option value="Arial, sans-serif">Arial</option>
+        <option value="Times New Roman, serif">Times New Roman</option>
+        <option value="Courier New, monospace">Courier New</option>
+      </select>
+
+      <label for="size-input">Tiny Text Size:</label>
+      <input type="number" id="size-input" value="12" min="1" max="100">
+    </div>
+
     <div id="tiny-text"></div>
   </div>
 
   <script>
-    document.getElementById('text-input').addEventListener('input', function() {
-      const inputText = this.value;
+    const textInput = document.getElementById('text-input');
+    const fontSelect = document.getElementById('font-select');
+    const sizeInput = document.getElementById('size-input');
+    const tinyTextOutput = document.getElementById('tiny-text');
+
+    textInput.addEventListener('input', updateTinyText);
+    fontSelect.addEventListener('change', updateTinyText);
+    sizeInput.addEventListener('input', updateTinyText);
+
+    function updateTinyText() {
+      const inputText = textInput.value;
+      const selectedFont = fontSelect.value;
+      const tinyTextSize = sizeInput.value;
+
       const tinyText = inputText.split('').map(char => {
         if (char.match(/[a-z]/i)) {
           return String.fromCharCode(char.charCodeAt(0) + 8272);
         }
         return char;
       }).join('');
-      document.getElementById('tiny-text').innerText = tinyText;
-    });
+
+      tinyTextOutput.innerText = tinyText;
+      tinyTextOutput.style.fontFamily = selectedFont;
+      tinyTextOutput.style.fontSize = `${tinyTextSize}px`;
+    }
   </script>
 </body>
 </html>
