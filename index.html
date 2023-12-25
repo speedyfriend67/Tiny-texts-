@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiny Text Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #text-input {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    #tiny-text {
+      margin-top: 20px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <label for="text-input">Enter your text:</label>
+    <textarea id="text-input" placeholder="Type here..."></textarea>
+    <div id="tiny-text"></div>
+  </div>
+
+  <script>
+    document.getElementById('text-input').addEventListener('input', function() {
+      const inputText = this.value;
+      const tinyText = inputText.split('').map(char => {
+        if (char.match(/[a-z]/i)) {
+          return String.fromCharCode(char.charCodeAt(0) + 8272);
+        }
+        return char;
+      }).join('');
+      document.getElementById('tiny-text').innerText = tinyText;
+    });
+  </script>
+</body>
+</html>
