@@ -63,6 +63,21 @@
   </div>
 
   <script>
+    const letters = {
+      "q": "ᵠ", "w": "ʷ", "e": "ᵉ", "r": "ʳ", "t": "ᵗ", "y": "ʸ",
+      "u": "ᵘ", "i": "ᶦ", "o": "ᵒ", "p": "ᵖ", "a": "ᵃ", "s": "ˢ",
+      "d": "ᵈ", "f": "ᶠ", "g": "ᵍ", "h": "ʰ", "j": "ʲ", "k": "ᵏ",
+      "l": "ˡ", "z": "ᶻ", "x": "ˣ", "c": "ᶜ", "v": "ᵛ", "b": "ᵇ",
+      "n": "ⁿ", "m": "ᵐ",
+      "Q": "ᵠ", "W": "ᵂ", "E": "ᴱ", "R": "ᴿ", "T": "ᵀ", "Y": "ʸ",
+      "U": "ᵁ", "I": "ᴵ", "O": "ᴼ", "P": "ᴾ", "A": "ᴬ", "S": "ˢ",
+      "D": "ᴰ", "F": "ᶠ", "G": "ᴳ", "H": "ᴴ", "J": "ᴶ", "K": "ᴷ",
+      "L": "ᴸ", "Z": "ᶻ", "X": "ˣ", "C": "ᶜ", "V": "ⱽ", "B": "ᴮ",
+      "N": "ᴺ", "M": "ᴹ",
+      "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵",
+      "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹"
+    };
+
     const textInput = document.getElementById('text-input');
     const fontSelect = document.getElementById('font-select');
     const sizeInput = document.getElementById('size-input');
@@ -78,8 +93,8 @@
       const tinyTextSize = sizeInput.value;
 
       const tinyText = inputText.split('').map(char => {
-        if (char.match(/[a-z]/i)) {
-          const tinyChar = String.fromCharCode(char.charCodeAt(0) + 8272);
+        if (char.match(/[a-z0-9]/i)) {
+          const tinyChar = letters[char];
           return `<span style="font-size: ${tinyTextSize}px;">${tinyChar}</span>`;
         }
         return char;
